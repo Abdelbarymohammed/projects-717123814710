@@ -59,6 +59,7 @@ import { Product, CartItem, WishlistItem, UserProfile, Order, SliderImage, Categ
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import ProductDetail from './components/ProductDetail';
 import Checkout from './components/Checkout';
 import AdminDashboard from './components/AdminDashboard';
@@ -212,6 +213,7 @@ export default function AppWrapper() {
     <HelmetProvider>
       <ErrorBoundary>
         <App />
+        <SpeedInsights />
       </ErrorBoundary>
     </HelmetProvider>
   );
