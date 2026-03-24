@@ -1,0 +1,150 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID from Firebase Auth" },
+        "email": { "type": "string", "format": "email", "description": "User's email address" },
+        "displayName": { "type": "string", "description": "User's display name" },
+        "photoURL": { "type": "string", "description": "User's profile picture URL" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" },
+        "role": { "type": "string", "enum": ["admin", "user"] }
+      },
+      "required": ["uid", "email"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Fashion product details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique product ID" },
+        "name": { "type": "string", "description": "Product name" },
+        "description": { "type": "string", "description": "Product description" },
+        "price": { "type": "number", "description": "Product price in SDG" },
+        "category": { "type": "string", "description": "Product category" },
+        "imageUrl": { "type": "string", "description": "Product image URL" },
+        "stock": { "type": "integer", "description": "Available stock quantity" },
+        "rating": { "type": "number", "description": "Average user rating" },
+        "sizes": { "type": "array", "items": { "type": "string" } },
+        "colors": { "type": "array", "items": { "type": "string" } },
+        "reviews": { "type": "array", "items": { "$ref": "Review" } },
+        "metaTitle": { "type": "string" },
+        "metaDescription": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "imageUrl"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Product review",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" }
+      }
+    },
+    "CartItem": {
+      "title": "CartItem",
+      "description": "Item in user's shopping cart",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "description": "Reference to the product" },
+        "quantity": { "type": "integer", "description": "Quantity of the product" },
+        "addedAt": { "type": "string", "format": "date-time", "description": "When the item was added to the cart" },
+        "selectedSize": { "type": "string" },
+        "selectedColor": { "type": "string" }
+      },
+      "required": ["productId", "quantity"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "state": { "type": "string" },
+        "city": { "type": "string" },
+        "shippingCost": { "type": "number" },
+        "subtotal": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "processing", "out-for-delivery", "delivered"] },
+        "paymentMethod": { "type": "string" },
+        "paymentScreenshotUrl": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "customerName", "phone", "address", "state", "total"]
+    },
+    "WishlistItem": {
+      "title": "WishlistItem",
+      "description": "Item in user's wishlist",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "description": "Reference to the product" },
+        "addedAt": { "type": "string", "format": "date-time", "description": "When the item was added to the wishlist" }
+      },
+      "required": ["productId"]
+    },
+    "SliderImage": {
+      "title": "SliderImage",
+      "description": "Image for the hero slider",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "title": { "type": "string" },
+        "link": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["imageUrl", "order"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": ["name"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Store products"
+    },
+    "/users/{uid}/cart/{productId}": {
+      "schema": "CartItem",
+      "description": "User's shopping cart items"
+    },
+    "/users/{uid}/wishlist/{productId}": {
+      "schema": "WishlistItem",
+      "description": "User's wishlist items"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders"
+    },
+    "/sliderImages/{sliderId}": {
+      "schema": "SliderImage",
+      "description": "Hero slider images"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Product categories"
+    }
+  }
+}

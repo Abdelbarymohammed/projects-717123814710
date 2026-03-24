@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Almarai:wght@300;400;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary-color: #003366;
+  --secondary-color: #FFFFFF;
+  --font-family: "Cairo", "Almarai", ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  --font-sans: var(--font-family);
+  --color-brand-blue: var(--primary-color);
+  --color-brand-light-blue: color-mix(in srgb, var(--primary-color), white 10%);
+  --color-brand-white: var(--secondary-color);
+  --color-brand-gray: #F5F5F5;
+}
+
+body {
+  @apply bg-brand-white text-brand-blue font-sans;
+}
+
+.btn-primary {
+  @apply bg-brand-blue text-white px-6 py-2 rounded-md hover:bg-brand-light-blue transition-all duration-300 font-medium;
+}
+
+.btn-outline {
+  @apply border border-brand-blue text-brand-blue px-6 py-2 rounded-md hover:bg-brand-blue hover:text-white transition-all duration-300 font-medium;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-brand-blue/20 rounded-full hover:bg-brand-blue/40 transition-colors;
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+.input-field {
+  @apply w-full bg-brand-gray border border-transparent rounded-xl py-3 px-4 focus:bg-white focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/10 outline-none transition-all;
+}
