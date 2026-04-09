@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { 
   Search, 
   User, 
@@ -212,6 +213,7 @@ export default function AppWrapper() {
     <HelmetProvider>
       <ErrorBoundary>
         <App />
+        <SpeedInsights />
       </ErrorBoundary>
     </HelmetProvider>
   );
